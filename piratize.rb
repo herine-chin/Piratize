@@ -50,11 +50,25 @@ class Piratize
 
   def self.translate(string)
     updated_string = self.remove_words(string)
-    p TalkLikeAPirate.translate(updated_string)
+    TalkLikeAPirate.translate(updated_string)
   end
 
   def self.remove_words(string)
-    string
+    not_allowed_words = {
+      "gold"=> true,
+      "treasure"=> true,
+      "coin"=> true,
+      "coins"=> true
+    }
+
+    words = string.split(" ")
+    updated_words = []
+    words.each do |word|
+      unless not_allowed_words[word]
+        updated_words.push(word)
+      end
+    end
+    updated_words.join(" ")
   end
 
 end
