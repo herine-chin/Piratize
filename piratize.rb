@@ -1,4 +1,5 @@
 require "talk_like_a_pirate"
+
 class PartyRepelledError < StandardError ; end
 class NoTreasureError < StandardError ; end
 class WhatBeThisError < StandardError ; end
@@ -34,6 +35,26 @@ class ShipWreck
   def initialize ship
     @original_ship = ship
     ship.sink!
+  end
+
+end
+
+class Piratize
+
+  def self.process(object)
+    if object.is_a? String
+      self.translate(object)
+    else
+    end
+  end
+
+  def self.translate(string)
+    updated_string = self.remove_words(string)
+    p TalkLikeAPirate.translate(updated_string)
+  end
+
+  def self.remove_words(string)
+    string
   end
 
 end
