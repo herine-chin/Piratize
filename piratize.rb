@@ -43,12 +43,13 @@ class Piratize
 
   def self.process(object)
     if object.is_a? String
-      self.translate(object)
-    else
+      self.translate_string(object)
+    elsif object.is_a? Array
+      self.translate_array(object)
     end
   end
 
-  def self.translate(string)
+  def self.translate_string(string)
     updated_string = self.remove_words(string)
     TalkLikeAPirate.translate(updated_string)
   end
@@ -69,6 +70,16 @@ class Piratize
       end
     end
     updated_words.join(" ")
+  end
+
+  def self.translate_array(array)
+    translated_array = []
+    array.each do |element|
+      if element.is_a? String
+        translated_array.push(self.translate_string(element))
+      end
+    end
+    translated_array
   end
 
 end
