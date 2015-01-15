@@ -46,6 +46,7 @@ class Piratize
       self.translate_string(object)
     elsif object.is_a? Array
       self.translate_array(object)
+
     end
   end
 
@@ -75,11 +76,11 @@ class Piratize
   def self.translate_array(array)
     translated_array = []
     array.each do |element|
-      if element.is_a? String
-        translated_array.push(self.translate_string(element))
-      end
+      translated_array.push(self.process(element))
     end
     translated_array
   end
+
+
 
 end
