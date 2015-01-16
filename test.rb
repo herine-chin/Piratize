@@ -25,6 +25,20 @@ p test_hash.process
 p ["apple","this is a sentence","I have coins"].process
 p 0.3.process
 
+# work as a module
+class Something
+  include Piratize
+end
+
+anything = Something.new
+p anything.process("Today is a good day to die")
+
+class SomethingAgain
+  extend Piratize
+end
+
+p SomethingAgain.process("I love coins and lots of gold")
+
 # passing symbol
 symbol = :"something"
 p Piratize.process(symbol)

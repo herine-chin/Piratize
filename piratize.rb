@@ -39,7 +39,13 @@ class ShipWreck
 
 end
 
-class Piratize
+module Piratize
+  @not_allowed_words = {
+    "gold"=> true,
+    "treasure"=> true,
+    "coin"=> true,
+    "coins"=> true
+  }
 
   def self.process(object)
     if block_given?
@@ -65,17 +71,10 @@ class Piratize
   end
 
   def self.remove_words(string)
-    not_allowed_words = {
-      "gold"=> true,
-      "treasure"=> true,
-      "coin"=> true,
-      "coins"=> true
-    }
-
     words = string.split(" ")
     updated_words = []
     words.each do |word|
-      unless not_allowed_words[word]
+      unless @not_allowed_words[word]
         updated_words.push(word)
       end
     end
@@ -100,6 +99,10 @@ class Piratize
 
   def self.translate_float(float)
     (float * 8).floor.to_s + "/8" #not a rational :(
+  end
+
+  def process(object)
+    Piratize.process(object)
   end
 
 end
