@@ -42,17 +42,20 @@ end
 class Piratize
 
   def self.process(object)
-    if object.is_a? String
-      self.translate_string(object)
-    elsif object.is_a? Array
-      self.translate_array(object)
-    elsif object.is_a? Hash
-      self.translate_hash(object)
-    elsif object.is_a? Float
-      self.translate_float(object)
+    if block_given?
+      self.process(yield (object))
     else
-      yield (object)
+      if object.is_a? String
+        self.translate_string(object)
+      elsif object.is_a? Array
+        self.translate_array(object)
+      elsif object.is_a? Hash
+        self.translate_hash(object)
+      elsif object.is_a? Float
+        self.translate_float(object)
+      end
     end
+
   end
 
   def self.translate_string(string)
