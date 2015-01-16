@@ -46,7 +46,12 @@ class Piratize
       self.translate_string(object)
     elsif object.is_a? Array
       self.translate_array(object)
-
+    elsif object.is_a? Hash
+      self.translate_hash(object)
+    elsif object.is_a? Float
+      self.translate_float(object)
+    else
+      yield (object)
     end
   end
 
@@ -81,6 +86,16 @@ class Piratize
     translated_array
   end
 
+  def self.translate_hash(hash)
+    updated_hash = {}
+    hash.each do |key, value|
+      updated_hash[key] = self.process(value)
+    end
+    updated_hash
+  end
 
+  def self.translate_float(float)
+    (float * 8).floor.to_s + "/8"
+  end
 
 end
