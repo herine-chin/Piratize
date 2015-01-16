@@ -53,6 +53,8 @@ class Piratize
         self.translate_hash(object)
       elsif object.is_a? Float
         self.translate_float(object)
+      elsif object.is_a? Symbol
+        raise WhatBeThisError.new , "'Ere, what be a 'symbol'"
       end
     end
 
@@ -98,7 +100,8 @@ class Piratize
   end
 
   def self.translate_float(float)
-    (float * 8).floor.to_s + "/8"
+    (float * 8).floor.to_s + "/8" #not a rational :(
   end
 
 end
+
