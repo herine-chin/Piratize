@@ -57,7 +57,6 @@ class Piratize
         raise WhatBeThisError.new , "'Ere, what be a 'symbol'"
       end
     end
-
   end
 
   def self.translate_string(string)
@@ -103,5 +102,29 @@ class Piratize
     (float * 8).floor.to_s + "/8" #not a rational :(
   end
 
+end
+
+class String
+  def process
+    Piratize.process(self)
+  end
+end
+
+class Hash
+  def process
+    Piratize.process(self)
+  end
+end
+
+class Array
+  def process
+    Piratize.process(self)
+  end
+end
+
+class Float
+  def process
+    Piratize.process(self)
+  end
 end
 
